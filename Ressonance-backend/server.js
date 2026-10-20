@@ -4,8 +4,8 @@ const cors = require('cors');
 const mysql = require('mysql2/promise');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { z } = require('zod'); // Requisito 5: Validação
-const winston = require('winston'); // Requisito 10: Observabilidade
+const { z } = require('zod');
+const winston = require('winston');
 
 const app = express();
 app.use(cors());
@@ -25,8 +25,8 @@ const logger = winston.createLogger({
         })
     ),
     transports: [
-        new winston.transports.File({ filename: 'app.log' }), // Guarda os logs num ficheiro
-        new winston.transports.Console() // Exibe também no terminal
+        new winston.transports.File({ filename: 'app.log' }),
+        new winston.transports.Console()
     ]
 });
 
@@ -37,7 +37,7 @@ const dbPool = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'ressonance_db',
+    database: process.env.DB_NAME || 'ressonance_data',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -59,6 +59,17 @@ const esquemaAlbum = z.object({
     ano: z.number().int().min(1900, "Ano inválido.").max(new Date().getFullYear(), "O ano não pode estar no futuro."),
     genero: z.string().min(1, "O género é obrigatório."),
     capa: z.string().url("A capa deve ser um URL válido.").optional().or(z.literal(''))
+});
+
+const esquemaResenha = z.object({
+    album_id: z.number().int("O ID do álbum deve ser um número inteiro."),
+    nota: z.number().min(0).max(5, "A nota deve ser entre 0 e 5."),
+    resenha: z.string().min(1, "O texto da resenha é obrigatório.")
+});
+
+const esquemaPerfil = z.object({
+    nome: z.string().min(1, "O nome não pode ficar vazio."),
+    generos: z.array(z.string()).max(3, "Você pode escolher no máximo 3 gêneros.")
 });
 
 // ==========================================
@@ -96,7 +107,6 @@ function verificarPerfilAdmin(req, res, next) {
 // ==========================================
 app.post('/api/auth/registar', async (req, res) => {
     try {
-        // Validação da entrada
         const dadosValidados = esquemaRegisto.parse(req.body);
 
         const [usuariosExistentes] = await dbPool.query('SELECT id FROM usuarios WHERE email = ?', [dadosValidados.email]);
@@ -176,7 +186,6 @@ app.get('/api/albuns', async (req, res) => {
 
 app.post('/api/albuns', verificarToken, verificarPerfilAdmin, async (req, res) => {
     try {
-        // Validação da entrada com Zod
         const dadosValidados = esquemaAlbum.parse(req.body);
 
         const query = 'INSERT INTO albuns (titulo, artista, ano, genero, capa) VALUES (?, ?, ?, ?, ?)';
@@ -214,6 +223,150 @@ app.delete('/api/albuns/:id', verificarToken, verificarPerfilAdmin, async (req, 
     } catch (erro) {
         logger.error(`Erro interno ao excluir álbum ID ${id}: ${erro.message}`);
         res.status(500).json({ erro: 'Erro interno ao excluir o álbum.' });
+    }
+});
+
+// ==========================================
+// 7. ROTAS DE FAIXAS
+// ==========================================
+app.get('/api/albuns/:id/faixas', async (req, res) => {
+    try {
+        const [faixas] = await dbPool.query(
+            'SELECT numero_faixa, titulo FROM faixas WHERE album_id = ? ORDER BY numero_faixa ASC',
+            [req.params.id]
+        );
+        res.status(200).json(faixas);
+    } catch (erro) {
+        logger.error(`Erro ao buscar faixas do álbum ID ${req.params.id}: ${erro.message}`);
+        res.status(500).json({ erro: 'Erro interno ao buscar as faixas.' });
+    }
+});
+
+// ==========================================
+// 8. ROTAS CRUD DE RESENHAS
+// ==========================================
+
+app.get('/api/albuns/:id/resenhas', async (req, res) => {
+    try {
+        const query = `
+            SELECT r.id, r.nota, r.texto AS resenha, r.data_publicacao, u.nome AS autor 
+            FROM resenhas r 
+            JOIN utilizadores u ON r.utilizador_id = u.id 
+            WHERE r.album_id = ? 
+            ORDER BY r.data_publicacao DESC
+        `;
+        const [resenhas] = await dbPool.query(query, [req.params.id]);
+        res.status(200).json(resenhas);
+    } catch (erro) {
+        logger.error(`Erro ao buscar resenhas do álbum ID ${req.params.id}: ${erro.message}`);
+        res.status(500).json({ erro: 'Erro ao buscar resenhas.' });
+    }
+});
+
+app.get('/api/resenhas/minhas', verificarToken, async (req, res) => {
+    try {
+        const query = `
+            SELECT r.id, r.nota, r.texto AS resenha, a.titulo AS album_titulo, a.capa AS album_capa 
+            FROM resenhas r 
+            JOIN albuns a ON r.album_id = a.id 
+            WHERE r.utilizador_id = ? 
+            ORDER BY r.data_publicacao DESC
+        `;
+        const [minhasResenhas] = await dbPool.query(query, [req.user.id]);
+        res.status(200).json(minhasResenhas);
+    } catch (erro) {
+        logger.error(`Erro ao buscar histórico do utilizador ID ${req.user.id}: ${erro.message}`);
+        res.status(500).json({ erro: 'Erro ao buscar seu histórico de resenhas.' });
+    }
+});
+
+app.post('/api/resenhas', verificarToken, async (req, res) => {
+    try {
+        const dadosValidados = esquemaResenha.parse(req.body);
+        
+        const [albumExiste] = await dbPool.query('SELECT id FROM albuns WHERE id = ?', [dadosValidados.album_id]);
+        if (albumExiste.length === 0) return res.status(404).json({ erro: 'Álbum não encontrado.' });
+
+        const [resultado] = await dbPool.query(
+            'INSERT INTO resenhas (album_id, utilizador_id, nota, texto) VALUES (?, ?, ?, ?)',
+            [dadosValidados.album_id, req.user.id, dadosValidados.nota, dadosValidados.resenha]
+        );
+
+        logger.info(`Nova resenha criada (ID: ${resultado.insertId}) pelo utilizador ID ${req.user.id}`);
+        res.status(201).json({ mensagem: 'Resenha publicada com sucesso!', id: resultado.insertId });
+    } catch (erro) {
+        if (erro instanceof z.ZodError) return res.status(400).json({ erro: 'Erro de validação', detalhes: erro.errors });
+        logger.error(`Erro ao criar resenha: ${erro.message}`);
+        res.status(500).json({ erro: 'Erro interno ao publicar resenha.' });
+    }
+});
+
+app.delete('/api/resenhas/:id', verificarToken, async (req, res) => {
+    try {
+        const resenhaId = req.params.id;
+        const [resenha] = await dbPool.query('SELECT utilizador_id FROM resenhas WHERE id = ?', [resenhaId]);
+
+        if (resenha.length === 0) return res.status(404).json({ erro: 'Resenha não encontrada.' });
+
+        if (resenha[0].utilizador_id !== req.user.id && req.user.perfil !== 'admin') {
+            logger.warn(`Tentativa de exclusão não autorizada: Utilizador ID ${req.user.id} tentou apagar resenha ID ${resenhaId}`);
+            return res.status(403).json({ erro: 'Acesso negado. Apenas o autor ou um administrador podem excluir esta resenha.' });
+        }
+
+        await dbPool.query('DELETE FROM resenhas WHERE id = ?', [resenhaId]);
+        logger.info(`Resenha ID ${resenhaId} excluída pelo utilizador ID ${req.user.id}`);
+        res.status(200).json({ mensagem: 'Resenha excluída com sucesso.' });
+    } catch (erro) {
+        logger.error(`Erro ao excluir resenha ID ${req.params.id}: ${erro.message}`);
+        res.status(500).json({ erro: 'Erro ao tentar excluir a resenha.' });
+    }
+});
+
+// ==========================================
+// 9. ROTAS DO PERFIL DE UTILIZADOR
+// ==========================================
+
+app.get('/api/usuarios/me', verificarToken, async (req, res) => {
+    try {
+        const [usuario] = await dbPool.query('SELECT nome, email, perfil FROM utilizadores WHERE id = ?', [req.user.id]);
+        if (usuario.length === 0) return res.status(404).json({ erro: 'Utilizador não encontrado.' });
+
+        const [generosDB] = await dbPool.query('SELECT genero FROM utilizadores_generos WHERE utilizador_id = ?', [req.user.id]);
+        const generos = generosDB.map(g => g.genero);
+
+        res.status(200).json({ ...usuario[0], generos });
+    } catch (erro) {
+        logger.error(`Erro ao buscar perfil do utilizador ID ${req.user.id}: ${erro.message}`);
+        res.status(500).json({ erro: 'Erro ao buscar perfil.' });
+    }
+});
+
+app.put('/api/usuarios/me', verificarToken, async (req, res) => {
+    const conexao = await dbPool.getConnection();
+    try {
+        const dadosValidados = esquemaPerfil.parse(req.body);
+        
+        await conexao.beginTransaction();
+
+        await conexao.query('UPDATE utilizadores SET nome = ? WHERE id = ?', [dadosValidados.nome, req.user.id]);
+
+        await conexao.query('DELETE FROM utilizadores_generos WHERE utilizador_id = ?', [req.user.id]);
+        
+        if (dadosValidados.generos && dadosValidados.generos.length > 0) {
+            const inserts = dadosValidados.generos.map(genero => [req.user.id, genero]);
+            await conexao.query('INSERT INTO utilizadores_generos (utilizador_id, genero) VALUES ?', [inserts]);
+        }
+
+        await conexao.commit();
+        logger.info(`Perfil do utilizador ID ${req.user.id} atualizado com sucesso.`);
+        res.status(200).json({ mensagem: 'Perfil atualizado com sucesso!' });
+    } catch (erro) {
+        await conexao.rollback();
+        if (erro instanceof z.ZodError) return res.status(400).json({ erro: 'Erro de validação', detalhes: erro.errors });
+        logger.error(`Erro ao atualizar perfil (ID ${req.user.id}): ${erro.message}`);
+        res.status(500).json({ erro: 'Erro ao atualizar o perfil.' });
+    } finally {
+        conexao.release();
     }
 });
 
