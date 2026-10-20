@@ -1,8 +1,6 @@
-// backend/seed.js
 require('dotenv').config();
 const mysql = require('mysql2/promise');
 
-// 1. Cole aqui o seu array 'albuns' inteiro do ficheiro dados.js do front-end
 const albuns = [
     {
         id: 1, titulo: "Ten", artista: "Pearl Jam", ano: 1991, genero: "Grunge", capa: "img/Ten.jpg",
@@ -124,11 +122,10 @@ const albuns = [
         id: 30, titulo: "A Tábua de Esmeralda", artista: "Jorge Ben Jor", ano: 1974, genero: "Samba Rock", capa: "img/JorgeBen.jpeg",
         musicas: ["Os Alquimistas Estão Chegando", "O Homem da Gravata Florida", "Errare Humanum Est", "Menina Mulher da Pele Preta", "Brother", "Minha Teimosia, Uma Arma Pra Te Conquistar", "Magnólia", "Minhas Margaridas", "Zumbi", "Hermes Trismegisto e Sua Celeste Tábua de Esmeralda", "Cinco Minutos", "O Namorado da Viúva"]
     }
-    // ...
+
 ];
 
 async function popularBancoDeDados() {
-    // 2. Conecta ao banco usando as variáveis do seu .env
     const conexao = await mysql.createConnection({
         host: process.env.DB_HOST || 'localhost',
         user: process.env.DB_USER || 'root',
@@ -140,8 +137,6 @@ async function popularBancoDeDados() {
 
     try {
         let inseridos = 0;
-
-        // 3. Percorre o array e insere no MySQL
         for (const album of albuns) {
             const query = 'INSERT INTO albuns (titulo, artista, ano, genero, capa) VALUES (?, ?, ?, ?, ?)';
             const valores = [album.titulo, album.artista, album.ano, album.genero, album.capa];
@@ -155,7 +150,7 @@ async function popularBancoDeDados() {
     } catch (erro) {
         console.error('Erro durante a migração:', erro.message);
     } finally {
-        await conexao.end(); // Fecha a ligação
+        await conexao.end();
     }
 }
 

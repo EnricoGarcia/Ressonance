@@ -39,24 +39,21 @@ async function limparEPovoar() {
         host: process.env.DB_HOST || 'localhost',
         user: process.env.DB_USER || 'root',
         password: process.env.DB_PASSWORD || '',
-        database: process.env.DB_NAME || 'ressonance_db'
+        database: process.env.DB_NAME || 'ressonance_data'
     });
 
     try {
         console.log('⏳ A iniciar limpeza profunda...');
-        
-        // 1. Desliga temporariamente a verificação de Chaves Estrangeiras! (O SEGREDO)
+    
         await conexao.query('SET FOREIGN_KEY_CHECKS = 0');
         
-        // 2. Trunca as tabelas (apaga tudo e repõe o ID para 1)
         await conexao.query('TRUNCATE TABLE resenhas');
         await conexao.query('TRUNCATE TABLE albuns');
         
-        // 3. Volta a ligar a segurança
         await conexao.query('SET FOREIGN_KEY_CHECKS = 1');
         
-        console.log('✅ Base de dados limpa. IDs repostos para 1.');
-        console.log('⏳ A iniciar povoamento...');
+        console.log('Base de dados limpa. IDs repostos para 1.');
+        console.log('A iniciar povoamento...');
 
         let inseridos = 0;
         for (const album of albuns) {
@@ -66,10 +63,10 @@ async function limparEPovoar() {
             inseridos++;
         }
 
-        console.log(`🎉 Sucesso! ${inseridos} álbuns inseridos perfeitamente.`);
+        console.log(`Sucesso! ${inseridos} álbuns inseridos perfeitamente.`);
 
     } catch (erro) {
-        console.error('❌ Erro:', erro.message);
+        console.error('Erro:', erro.message);
     } finally {
         await conexao.end();
     }
