@@ -4,7 +4,7 @@ const albuns = [
         musicas: ["Once", "Even Flow", "Alive", "Why Go", "Black", "Jeremy", "Oceans", "Porch", "Garden", "Deep", "Release"]
     },
     {
-        id: 2,  ,
+        id: 2, titulo: "Hybrid Theory", artista: "Linkin Park", ano: 2000, genero: "Nu Metal", capa: "img/HybridTheory.jpg",
         musicas: ["Papercut", "One Step Closer", "With You", "Points of Authority", "Crawling", "Runaway", "By Myself", "In the End", "A Place for My Head", "Forgotten", "Cure for the Itch", "Pushing Me Away"]
     },
     {

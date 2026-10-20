@@ -1,4 +1,3 @@
-// frontend/script.js
 document.addEventListener("DOMContentLoaded", () => {
     // 1. Lógica do Menu Lateral
     const btnMenu = document.getElementById('btn-menu');
@@ -12,10 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const gradeAlbuns = document.querySelector('.grade-albuns');
 
-    // 2. NOVA LÓGICA: Buscar Álbuns do Backend (API) via Fetch
+    // 2. Buscar Álbuns do Backend (API) via Fetch
     async function buscarAlbunsDaAPI() {
         try {
-            // Faz a requisição HTTP GET para a sua API no Node.js
+   
             const resposta = await fetch('http://localhost:3000/api/albuns');
             
             if (!resposta.ok) {
@@ -31,29 +30,57 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+
+    // 2. Buscar Álbuns do Backend
+    async function buscarAlbunsDaAPI() {
+        try {
+   
+            const respostaAlbuns = await fetch('http://localhost:3000/api/albuns');
+            if (!respostaAlbuns.ok) throw new Error('Falha ao buscar os álbuns.');
+            const albunsDoBanco = await respostaAlbuns.json();
+
+            let generosPreferidos = [];
+            const token = localStorage.getItem('token');
+            if (token) {
+                const respostaPerfil = await fetch('http://localhost:3000/api/usuarios/me', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (respostaPerfil.ok) {
+                    const perfil = await respostaPerfil.json();
+                    generosPreferidos = perfil.generos || [];
+                }
+            }
+
+            renderizarCatalogo(albunsDoBanco, generosPreferidos);
+            
+        } catch (erro) {
+            console.error('Erro de conexão:', erro);
+            gradeAlbuns.innerHTML = `<p style="color: red; text-align: center;">Erro ao carregar o catálogo. Verifique o servidor.</p>`;
+        }
+    }
+
     // 3. Renderizar o Catálogo na Tela
-    function renderizarCatalogo(listaDeAlbuns) {
+    async function renderizarCatalogo(listaDeAlbuns, generosPreferidos) {
         gradeAlbuns.innerHTML = ''; 
-
-        // Recupera os gêneros escolhidos pelo utilizador (por enquanto mantemos no localStorage o perfil, 
-        // mas a nota máxima seria alcançada movendo isso para o banco de dados também no futuro)
-        const perfilSalvo = JSON.parse(localStorage.getItem('usuarioPerfil'));
-        const generosPreferidos = perfilSalvo && perfilSalvo.generos ? perfilSalvo.generos : [];
-
-        // Separa os álbuns em dois grupos com base nas preferências
         const albunsPreferidos = listaDeAlbuns.filter(album => generosPreferidos.includes(album.genero));
         const outrosAlbuns = listaDeAlbuns.filter(album => !generosPreferidos.includes(album.genero));
-
-        // Neste momento, estamos simulando a ordenação pois a média virá das resenhas (próximo passo da API)
-        // Por hora, apenas junta os dois grupos: Preferidos primeiro, seguidos do resto
         const albunsOrdenados = [...albunsPreferidos, ...outrosAlbuns];
 
-        // Desenha os cartões na tela
-        albunsOrdenados.forEach(album => {
-            // Média fictícia para visualização até conectarmos as resenhas no backend
-            const mediaExibicao = "4.5"; 
-            
-            // Tratamento caso a capa seja null no banco de dados
+        for (const album of albunsOrdenados) {
+            let mediaExibicao = "0.0";
+            try {
+                const res = await fetch(`http://localhost:3000/api/albuns/${album.id}/resenhas`);
+                if (res.ok) {
+                    const resenhas = await res.json();
+                    if (resenhas.length > 0) {
+                        const soma = resenhas.reduce((acc, r) => acc + parseFloat(r.nota), 0);
+                        mediaExibicao = (soma / resenhas.length).toFixed(1);
+                    }
+                }
+            } catch (err) {
+                console.error(`Erro ao buscar resenhas do álbum ${album.id}:`, err);
+            }
+
             const imagemCapa = album.capa ? album.capa : 'img/placeholder.jpg';
 
             const cartaoHTML = `
@@ -71,9 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             
             gradeAlbuns.innerHTML += cartaoHTML;
-        });
+        }
     }
 
-    // Inicia a busca assim que a página carrega
     buscarAlbunsDaAPI();
-});
+})
