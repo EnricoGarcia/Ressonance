@@ -5,3 +5,15 @@
 [2026-10-14T13:49:20.261Z] INFO: Servidor iniciado com sucesso.
 [2026-10-20T11:51:33.744Z] INFO: Servidor iniciado com sucesso.
 [2026-10-20T12:04:57.505Z] INFO: Servidor iniciado com sucesso.
+[2026-10-20T12:18:33.816Z] INFO: Servidor iniciado com sucesso.
+[2026-11-09T13:20:36.987Z] INFO: Servidor iniciado com sucesso.
+[2026-11-09T13:20:46.406Z] ERROR: Erro interno ao procurar álbuns: 
+[2026-11-09T14:26:11.130Z] ERROR: Erro interno no login: Table 'ressonance_data.usuarios' doesn't exist
+[2026-11-09T14:26:28.075Z] ERROR: Erro interno no login: Table 'ressonance_data.usuarios' doesn't exist
+[2026-11-09T14:30:02.144Z] INFO: Servidor iniciado com sucesso.
+[2026-11-09T14:30:23.271Z] ERROR: Erro interno no login: Table 'ressonance_data.usuarios' doesn't exist
+[2026-11-09T14:33:37.457Z] ERROR: Erro interno no login: Table 'ressonance_data.usuarios' doesn't exist
+[2026-11-09T14:46:40.225Z] INFO: Servidor iniciado com sucesso.
+[2026-11-09T14:47:05.395Z] ERROR: Erro interno no login: Table 'ressonance_data.usuarios' doesn't exist
+[2026-11-09T14:56:45.779Z] INFO: Servidor iniciado com sucesso.
+[2026-11-09T14:56:58.558Z] ERROR: Erro interno no login: Table 'ressonance_data.usuarios' doesn't exist

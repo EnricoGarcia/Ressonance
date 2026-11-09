@@ -186,9 +186,6 @@ albuns.forEach(album => {
     }
 });
 
-// ATENÇÃO: Adicione a importação do pacote bcrypt e jsonwebtoken no topo do arquivo se quiser usar a lógica de login depois!
-// const bcrypt = require('bcrypt'); // (Opcional, apenas se sua tabela pedir senha criptografada futuramente)
-
 async function popularTabelas() {
     const conexao = await mysql.createConnection({
         host: process.env.DB_HOST || 'localhost',
@@ -210,8 +207,6 @@ async function popularTabelas() {
         console.log('✅ Tabelas limpas e AUTO_INCREMENT repostos para 1.');
 
         // 2. Insere 5 Utilizadores Base
-        // Aqui assumimos que a sua tabela utilizadores tem apenas 'id', 'nome' e 'email' 
-        // (pois você removeu a 'senha' anteriormente devido ao erro do MySQL)
         const utilizadores = [
             { id: 1, nome: 'João Pedro', email: 'joao@ressonance.com' },
             { id: 2, nome: 'Maria Silva', email: 'maria@ressonance.com' },
@@ -234,19 +229,13 @@ async function popularTabelas() {
         }
         console.log(`✅ ${albuns.length} Álbuns inseridos com sucesso.`);
 
-        // 4. Insere as Resenhas e distribui pelos 5 utilizadores
         let resenhasInseridas = 0;
         
         for (const av of todasAvaliacoes) {
-            // A mágica acontece aqui: Atribuímos o utilizador de 1 a 5 baseados no índice da resenha.
-            // Para as resenhas base, o ID será 1, 2, 3, 4, 5. Para as geradas aleatoriamente, distribui igualmente.
-            
-            // Usamos o módulo (%) para ciclar entre os IDs 1 a 5
             const utilizadorAtribuido = (resenhasInseridas % 5) + 1;
 
             const queryResenha = 'INSERT INTO resenhas (album_id, utilizador_id, nota, texto) VALUES (?, ?, ?, ?)';
             
-            // Lembre-se: no seu array, o texto chama-se 'resenha', e não 'texto'
             await conexao.execute(queryResenha, [av.albumId, utilizadorAtribuido, av.nota, av.resenha]);
             resenhasInseridas++;
         }

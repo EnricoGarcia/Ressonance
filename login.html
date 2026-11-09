@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Ressonance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <button id="btn-menu" class="btn-menu">☰</button>
+        <h1 class="logo"><a href="index.html">Ressonance</a></h1>
+    </header>
+
+    <main class="container-auth">
+        <h2 id="titulo-form" style="color: #e57cd8; margin-bottom: 20px;">Entrar</h2>
+        
+        <form id="form-login" class="form-auth">
+            <input type="email" id="email-login" placeholder="Digite seu e-mail" required>
+            <input type="password" id="senha-login" placeholder="Digite sua senha" required>
+            <button type="submit" class="btn-submit">Entrar</button>
+            <p class="alternar-auth" id="ir-para-cadastro">Ainda não tem conta? Cadastre-se</p>
+        </form>
+
+        <form id="form-cadastro" class="form-auth" style="display: none;">
+            <input type="text" id="nome-cadastro" placeholder="Digite seu nome" required>
+            <input type="email" id="email-cadastro" placeholder="Digite seu e-mail" required>
+            <input type="password" id="senha-cadastro" placeholder="Digite sua senha" required>
+            <button type="submit" class="btn-submit">Cadastrar</button>
+            <p class="alternar-auth" id="ir-para-login">Já tem conta? Faça Login</p>
+        </form>
+        <div id="mensagem-auth" style="margin-top: 15px; text-align: center;"></div>
+    </main>
+    <script src="login.js"></script>
+</body>
+</html>

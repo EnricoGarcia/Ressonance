@@ -67,6 +67,12 @@ const esquemaResenha = z.object({
     resenha: z.string().min(1, "O texto da resenha é obrigatório.")
 });
 
+// Validar os dados de entrada para criação de faixas
+const esquemaFaixa = z.object({
+    numero_faixa: z.number().int().positive("O número da faixa deve ser positivo."),
+    titulo: z.string().min(1, "O título da faixa é obrigatório.").max(150, "O título é muito longo.")
+});
+
 const esquemaPerfil = z.object({
     nome: z.string().min(1, "O nome não pode ficar vazio."),
     generos: z.array(z.string()).max(3, "Você pode escolher no máximo 3 gêneros.")
@@ -239,6 +245,30 @@ app.get('/api/albuns/:id/faixas', async (req, res) => {
     } catch (erro) {
         logger.error(`Erro ao buscar faixas do álbum ID ${req.params.id}: ${erro.message}`);
         res.status(500).json({ erro: 'Erro interno ao buscar as faixas.' });
+    }
+});
+// Criar nova faixa (Apenas Administrador)
+app.post('/api/albuns/:id/faixas', verificarToken, verificarPerfilAdmin, async (req, res) => {
+    try {
+        const albumId = req.params.id;
+        const dadosValidados = esquemaFaixa.parse(req.body);
+
+        // Verifica se o álbum existe antes de inserir a faixa
+        const [albumExiste] = await dbPool.query('SELECT id FROM albuns WHERE id = ?', [albumId]);
+        if (albumExiste.length === 0) return res.status(404).json({ erro: 'Álbum não encontrado para vincular a faixa.' });
+
+        const [resultado] = await dbPool.query(
+            'INSERT INTO faixas (album_id, numero_faixa, titulo) VALUES (?, ?, ?)',
+            [albumId, dadosValidados.numero_faixa, dadosValidados.titulo]
+        );
+
+        logger.info(`Nova faixa cadastrada (ID: ${resultado.insertId}) no álbum ID ${albumId} pelo admin ID ${req.user.id}`);
+        res.status(201).json({ mensagem: 'Faixa cadastrada com sucesso!', id: resultado.insertId });
+        
+    } catch (erro) {
+        if (erro instanceof z.ZodError) return res.status(400).json({ erro: 'Erro de validação', detalhes: erro.errors });
+        logger.error(`Erro ao cadastrar faixa no álbum ID ${req.params.id}: ${erro.message}`);
+        res.status(500).json({ erro: 'Erro interno ao cadastrar a faixa.' });
     }
 });
 

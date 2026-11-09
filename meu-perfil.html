@@ -42,21 +42,18 @@
         </aside>
 
         <!-- CONTEUDO DO PERFIL -->
-        <main class="container-perfil">
-            <h2 class="titulo-pagina">Meu Perfil</h2>
-            
-            <div class="caixa-formulario-perfil">
-                <!-- CAMPO DO NOME -->
-                <input type="text" id="input-nome-perfil" class="input-escuro" placeholder="Digite o nome do usuário" autocomplete="off">
-                
-                <!-- GENEROS MUSICAIS -->
-                <div class="caixa-preta-generos">
-                    <div id="grid-generos" class="grid-generos">
-                    </div>
-                </div>
+        <main class="perfil-container">
+            <h2 class="perfil-titulo">Meu Perfil</h2>
+    
+            <div class="perfil-caixa-branca">
+            <input type="text" id="nome-usuario" class="input-nome" placeholder="Digite o nome do usuário">
+        
+            <div class="caixa-generos" id="lista-generos">
             </div>
-            
-            <button id="btn-salvar-perfil" class="btn-salvar-rosa">Salvar</button>
+        </div>
+    
+     <button id="btn-salvar" class="btn-salvar">Salvar</button>
+        <div id="mensagem-feedback" class="mensagem-feedback"></div>
         </main>
     </div>
 

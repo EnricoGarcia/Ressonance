@@ -1,13 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Carrega o nome do utilizador salvo
-    const perfilSalvo = JSON.parse(localStorage.getItem('usuarioPerfil'));
-    const nomeSidebar = document.getElementById('nome-perfil-sidebar');
-    
-    if (nomeSidebar && perfilSalvo && perfilSalvo.nome) {
-        nomeSidebar.textContent = perfilSalvo.nome;
+    // 1. Encontra o link/botão "Meu Perfil" na barra lateral
+    const linkMeuPerfil = document.querySelector('a[href="meu-perfil.html"]');
+
+    if (linkMeuPerfil) {
+        linkMeuPerfil.addEventListener('click', (evento) => {
+            evento.preventDefault(); // Impede o redirecionamento imediato
+
+            // 2. Verifica se existe um token de login salvo
+            const token = localStorage.getItem('token');
+
+            if (token) {
+                window.location.href = 'meu-perfil.html';
+            } else {
+                window.location.href = 'login.html'; 
+            }
+        });
     }
 
-    // 2. Botão "Sair"
+
+    // 3. Botão "Sair"
     const btnSair = document.getElementById('btn-sair');
     if (btnSair) {
         btnSair.addEventListener('click', (e) => {

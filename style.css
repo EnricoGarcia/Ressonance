@@ -384,9 +384,6 @@ main {
     margin-right: 5px;
 }
 
-/* =========================================
-   SECÇÃO DE RESENHAS NA PÁGINA DO ÁLBUM
-   ========================================= */
 .seccao-resenhas {
     border-top: 1px solid var(--borda-cor);
     padding-top: 30px;
@@ -451,4 +448,152 @@ main {
     font-size: 0.95rem;
     line-height: 1.4;
     font-style: italic;
+}
+
+.perfil-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+}
+
+.perfil-titulo {
+    color: #e57cd8; 
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.perfil-caixa-branca {
+    background-color: #e9ecef; 
+    border-radius: 20px;
+    padding: 30px;
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.input-nome {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 18px;
+    text-align: center;
+    font-size: 16px;
+    outline: none;
+}
+
+.input-nome::placeholder {
+    color: #b0b0b0;
+}
+
+.caixa-generos {
+    background-color: #000;
+    border-radius: 20px;
+    padding: 35px 25px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;       
+    justify-content: center; 
+    gap: 15px;            
+}
+
+.btn-genero {
+    background-color: #f8f9fa;
+    color: #000;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+.btn-genero:hover {
+    background-color: #d3d3d3;
+}
+
+.btn-genero.selecionado {
+    background-color: #e57cd8;
+    color: #fff;
+}
+
+.btn-salvar {
+    background-color: #e57cd8;
+    color: #000;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.btn-salvar:hover {
+    background-color: #d06bc3;
+}
+
+.container-auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+}
+
+.form-auth {
+    background-color: #f1f3f5;
+    padding: 30px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.form-auth input, 
+.form-auth select {
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+}
+
+.btn-submit {
+    background-color: #e57cd8;
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    align-self: center;
+}
+
+.btn-submit:hover {
+    background-color: #d06bc3;
+}
+
+.alternar-auth {
+    color: #e57cd8;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: underline;
 }

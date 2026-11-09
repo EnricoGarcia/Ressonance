@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administração - Ressonance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Painel do Admin - Cadastrar Álbum</h1>
+        <a href="index.html">Voltar para a Home</a>
+    </header>
+
+    <main>
+        <section id="cadastro-album">
+            <h2>Adicionar Novo Álbum ao Catálogo</h2>
+            <form id="form-album">
+                <div>
+                    <label for="titulo">Título do Álbum:</label>
+                    <input type="text" id="titulo" name="titulo" required>
+                </div>
+                <div>
+                    <label for="artista">Artista:</label>
+                    <input type="text" id="artista" name="artista" required>
+                </div>
+                <div>
+                    <label for="ano">Ano de Lançamento:</label>
+                    <input type="number" id="ano" name="ano" min="1900" max="2100" required>
+                </div>
+                <div>
+                    <label for="genero">Gênero:</label>
+                    <input type="text" id="genero" name="genero" required>
+                </div>
+                <div>
+                    <label for="capa">URL da Capa (opcional):</label>
+                    <input type="url" id="capa" name="capa">
+                </div>
+                <button type="submit">Cadastrar Álbum</button>
+            </form>
+            <div id="mensagem-retorno"></div>
+        </section>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>
