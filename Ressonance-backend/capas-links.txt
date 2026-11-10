@@ -1,0 +1,101 @@
+Acabou Chorare
+  página: https://en.wikipedia.org/wiki/Acabou_Chorare
+  imagem: https://upload.wikimedia.org/wikipedia/en/9/93/Album_Acabou_chorare_cover.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled
+
+Chega de Saudade
+  página: https://en.wikipedia.org/wiki/Chega_de_Saudade_(album)
+  imagem: https://upload.wikimedia.org/wikipedia/en/e/ed/Joao_Gilberto_-_Chega_de_Saudade.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled
+
+Construção
+  FALHOU (artigo não encontrado (HTTP 404)) - baixe manualmente: https://en.wikipedia.org/wiki/Constru%C3%A7%C3%A3o_(album)
+
+Getz/Gilberto
+  página: https://en.wikipedia.org/wiki/Getz%2FGilberto
+  imagem: https://upload.wikimedia.org/wikipedia/en/9/96/Getz-gilberto.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled
+
+Os Mutantes
+  FALHOU (falha ao baixar imagem (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Os_Mutantes_(album)
+
+Wave
+  página: https://en.wikipedia.org/wiki/Wave_(Ant%C3%B4nio_Carlos_Jobim_album)
+  imagem: https://upload.wikimedia.org/wikipedia/en/a/ad/Wavejobim.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled
+
+Os Afro-Sambas
+  FALHOU (artigo não encontrado (HTTP 404)) - baixe manualmente: https://en.wikipedia.org/wiki/Os_Afro-Sambas
+
+Sgt. Pepper's Lonely Hearts Club Band
+  FALHOU (falha ao baixar imagem (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Sgt._Pepper's_Lonely_Hearts_Club_Band
+
+Nevermind
+  página: https://en.wikipedia.org/wiki/Nevermind
+  imagem: https://upload.wikimedia.org/wikipedia/en/b/b7/NirvanaNevermindalbumcover.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled
+
+Led Zeppelin IV
+  página: https://en.wikipedia.org/wiki/Led_Zeppelin_IV
+  imagem: https://upload.wikimedia.org/wikipedia/commons/f/fa/Zeppelin_IV.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled
+
+Born to Run
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Born_to_Run_(album)
+
+Purple Rain
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Purple_Rain_(album)
+
+The Velvet Underground & Nico
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/The_Velvet_Underground_%26_Nico
+
+Blue
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Blue_(Joni_Mitchell_album)
+
+Pet Sounds
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Pet_Sounds
+
+Hotel California
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Hotel_California_(Eagles_album)
+
+Appetite for Destruction
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Appetite_for_Destruction
+
+Illmatic
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Illmatic
+
+Back in Black
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Back_in_Black
+
+London Calling
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/London_Calling
+
+The Joshua Tree
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/The_Joshua_Tree
+
+Lemonade
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Lemonade_(Beyonc%C3%A9_album)
+
+Currents
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Currents_(Tame_Impala_album)
+
+Dummy
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Dummy_(album)
+
+Selected Ambient Works 85–92
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Selected_Ambient_Works_85%E2%80%9392
+
+A Love Supreme
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/A_Love_Supreme
+
+Buena Vista Social Club
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Buena_Vista_Social_Club_(album)
+
+Zombie
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Zombie_(Fela_Kuti_album)
+
+Otis Blue
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Otis_Blue%2FOtis_Redding_Sings_Soul
+
+Dookie
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Dookie
+
+British Steel
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/British_Steel_(album)
+
+Funeral
+  FALHOU (artigo não encontrado (HTTP 429)) - baixe manualmente: https://en.wikipedia.org/wiki/Funeral_(Arcade_Fire_album)

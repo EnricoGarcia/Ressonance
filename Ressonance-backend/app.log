@@ -65,3 +65,35 @@
 [2026-11-10T11:47:11.126Z] INFO: Login bem-sucedido: Utilizador ID 10 (enricodecastrogarcia.61@gmail.com)
 [2026-11-10T11:47:43.674Z] INFO: Perfil do utilizador ID 10 atualizado com sucesso.
 [2026-11-10T12:39:32.663Z] INFO: Servidor iniciado com sucesso.
+[2026-11-10T13:36:06.788Z] INFO: Login bem-sucedido: Utilizador ID 8 (admin@teste.com)
+[2026-11-10T18:40:07.713Z] INFO: Servidor iniciado com sucesso.
+[2026-11-10T18:41:25.133Z] INFO: Login bem-sucedido: Utilizador ID 10 (enricodecastrogarcia.61@gmail.com)
+[2026-11-10T18:45:24.979Z] INFO: Login bem-sucedido: Utilizador ID 8 (admin@teste.com)
+[2026-11-10T18:56:02.029Z] INFO: Criação de entidade: Álbum "Só Pra Contrariar" adicionado pelo admin ID 8
+[2026-11-10T18:56:02.045Z] INFO: Nova faixa cadastrada (ID: 681) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.056Z] INFO: Nova faixa cadastrada (ID: 682) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.071Z] INFO: Nova faixa cadastrada (ID: 683) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.083Z] INFO: Nova faixa cadastrada (ID: 684) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.096Z] INFO: Nova faixa cadastrada (ID: 685) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.108Z] INFO: Nova faixa cadastrada (ID: 686) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.120Z] INFO: Nova faixa cadastrada (ID: 687) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.133Z] INFO: Nova faixa cadastrada (ID: 688) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.144Z] INFO: Nova faixa cadastrada (ID: 689) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.155Z] INFO: Nova faixa cadastrada (ID: 690) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.165Z] INFO: Nova faixa cadastrada (ID: 691) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.176Z] INFO: Nova faixa cadastrada (ID: 692) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.186Z] INFO: Nova faixa cadastrada (ID: 693) no álbum ID 63 pelo admin ID 8
+[2026-11-10T18:56:02.198Z] INFO: Nova faixa cadastrada (ID: 694) no álbum ID 63 pelo admin ID 8
+[2026-11-10T19:17:43.942Z] INFO: Criação de entidade: Álbum "One-x" adicionado pelo admin ID 8
+[2026-11-10T19:17:43.959Z] INFO: Nova faixa cadastrada (ID: 695) no álbum ID 64 pelo admin ID 8
+[2026-11-10T19:17:43.970Z] INFO: Nova faixa cadastrada (ID: 696) no álbum ID 64 pelo admin ID 8
+[2026-11-10T19:17:43.982Z] INFO: Nova faixa cadastrada (ID: 697) no álbum ID 64 pelo admin ID 8
+[2026-11-10T19:17:43.991Z] INFO: Nova faixa cadastrada (ID: 698) no álbum ID 64 pelo admin ID 8
+[2026-11-10T19:17:44.002Z] INFO: Nova faixa cadastrada (ID: 699) no álbum ID 64 pelo admin ID 8
+[2026-11-10T19:17:44.012Z] INFO: Nova faixa cadastrada (ID: 700) no álbum ID 64 pelo admin ID 8
+[2026-11-10T19:17:44.022Z] INFO: Nova faixa cadastrada (ID: 701) no álbum ID 64 pelo admin ID 8
+[2026-11-10T19:17:44.032Z] INFO: Nova faixa cadastrada (ID: 702) no álbum ID 64 pelo admin ID 8
+[2026-11-10T19:17:44.042Z] INFO: Nova faixa cadastrada (ID: 703) no álbum ID 64 pelo admin ID 8
+[2026-11-10T19:17:44.052Z] INFO: Nova faixa cadastrada (ID: 704) no álbum ID 64 pelo admin ID 8
+[2026-11-10T19:17:44.061Z] INFO: Nova faixa cadastrada (ID: 705) no álbum ID 64 pelo admin ID 8
+[2026-11-10T19:17:44.071Z] INFO: Nova faixa cadastrada (ID: 706) no álbum ID 64 pelo admin ID 8
