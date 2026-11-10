@@ -597,3 +597,228 @@ main {
     margin-top: 10px;
     text-decoration: underline;
 }
+
+/* =========================================================================
+   ESTILIZAÇÃO PARA AS PÁGINAS DE ADMIN E ADICIONAR RESENHA
+   ========================================================================= */
+
+.container-auth {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.perfil-titulo {
+    color: #b05cba;
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.perfil-caixa-branca {
+    background-color: #ced4da; 
+    padding: 40px;
+    border-radius: 20px;
+}
+
+.perfil-caixa-branca form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.perfil-caixa-branca input[type="text"],
+.perfil-caixa-branca input[type="number"],
+.perfil-caixa-branca input[type="url"],
+.perfil-caixa-branca textarea {
+    background-color: #000;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+.perfil-caixa-branca .slider-container {
+    background-color: #000;
+    color: #fff;
+    padding: 15px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.perfil-caixa-branca .slider-container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.btn-submit {
+    background-color: #d175e1;
+    color: #000;
+    border: none;
+    width: auto;
+    padding: 10px 40px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.2s ease;
+}
+
+.btn-submit:hover {
+    background-color: #b05cba;
+}
+
+.lista-autocomplete {
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    width: 100%;
+    
+    background-color: #000;
+    color: #fff;
+    
+    border: 1px solid #333; 
+    border-top: none;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    
+    max-height: 200px; 
+    overflow-y: auto; 
+    
+    z-index: 1000;
+    display: none; 
+    
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5); 
+}
+
+.item-autocomplete {
+    padding: 12px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left; 
+    border-bottom: 1px solid #333;
+    background-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.item-autocomplete:last-child {
+    border-bottom: none;
+}
+
+.item-autocomplete:hover {
+    background-color: #b05cba; 
+    color: #fff;
+}
+
+.lista-autocomplete::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.lista-autocomplete::-webkit-scrollbar-track {
+    background: #000; 
+    border-bottom-right-radius: 20px; 
+}
+
+.lista-autocomplete::-webkit-scrollbar-thumb {
+    background-color: #ced4da; 
+    border-radius: 10px; 
+}
+
+.lista-autocomplete::-webkit-scrollbar-thumb:hover {
+    background-color: #b05cba; 
+}
+
+#lista-minhas-resenhas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.nova-resenha-horizontal {
+    background-color: #121212;
+    border-radius: 20px;
+    display: flex;
+    align-items: stretch;
+    min-height: 120px;
+    overflow: hidden; 
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.resenha-bloco-esquerdo {
+    background-color: #121212; 
+    display: flex;
+    align-items: center;
+    padding: 10px 20px 10px 10px;
+    gap: 15px;
+    min-width: 250px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-right: 2px solid #121212;
+}
+
+.nova-capa-resenha {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 5px;
+    background-color: #222;
+}
+
+.resenha-info-titulos {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.novo-titulo-album {
+    font-size: 16px;
+    color: #fff;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+}
+
+.nova-nota-album {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.estrela-icone-grande {
+    color: #FFB800;
+    font-size: 24px;
+}
+
+.texto-nota-fracao {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.resenha-bloco-direito {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 40px;
+    background-color: #121212;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.novo-texto-resenha {
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    margin: 0;
+}

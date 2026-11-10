@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 window.location.href = `adicionar-resenha.html?id=${albumId}`;
             } else {
                 alert("Você precisa estar logado para adicionar uma resenha!");
-                // No futuro, redirecionaremos para a tela de login aqui.
                 window.location.href = 'index.html'; 
             }
         });

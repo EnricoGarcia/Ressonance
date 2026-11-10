@@ -9,7 +9,7 @@ async function criarAdministrador() {
             host: process.env.DB_HOST || 'localhost',
             user: process.env.DB_USER || 'root',
             password: process.env.DB_PASSWORD || '',
-            database: process.env.DB_NAME || 'reesonance_data'
+            database: process.env.DB_NAME || 'ressonance_data'
         });
 
         const hashSenha = await bcrypt.hash('123456', 10);

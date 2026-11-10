@@ -41,31 +41,28 @@
             </div>
         </aside>
 
-        <main class="container-add-resenha">
-            <h2 class="titulo-pagina">Adicionar Resenha</h2>
+       <main class="container-auth">
+    <h2 class="perfil-titulo">Adicionar Resenha</h2>
+    
+    <div class="perfil-caixa-branca">
+        <form id="form-resenha">
             
-            <div class="caixa-formulario">
-                
-                <!-- NOME DO ÁLBUM -->
-                <div class="grupo-input relativo">
-                    <input type="text" id="input-album" class="input-escuro" placeholder="Digite o nome do álbum" autocomplete="off">
-                    <div id="lista-autocomplete" class="dropdown-autocomplete"></div>
-                </div>
+            <input type="text" id="nome-album" placeholder="Digite o nome do álbum" required>
 
-                <!-- NOTA -->
-                <div class="grupo-input flex-row">
-                    <input type="range" id="range-nota" class="input-range" min="1" max="5" step="0.5" value="3">
-                    <span id="display-nota" class="valor-nota">3.0</span>
-                </div>
-
-                <!-- RESENHA -->
-                <div class="grupo-input">
-                    <textarea id="txt-resenha" class="input-escuro textarea-resenha" placeholder="Digite a resenha do álbum"></textarea>
-                </div>
-                
-                <button id="btn-enviar-resenha" class="btn-enviar">ENVIAR</button>
+            <div class="slider-container">
+                <label for="nota">Barra de rolagem (0-5, passo 0.5)</label>
+                <input type="range" id="nota" min="0" max="5" step="0.5" value="3.0" style="width: 80%;">
+                <span id="valor-nota" style="font-weight: bold; margin-left: 10px;">3.0</span>
             </div>
-        </main>
+
+            <textarea id="texto-resenha" placeholder="Digite a resenha do álbum" required rows="6" style="resize: vertical;"></textarea>
+        </form>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <button type="submit" form="form-resenha" class="btn-submit">Enviar</button>
+    </div>
+</main>
     </div>
 
     <script src="barralat.js"></script>

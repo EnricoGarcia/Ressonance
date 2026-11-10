@@ -8,9 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.title = "Meu Perfil - Ressonance";
 
-    const inputNome = document.getElementById('input-nome-perfil');
-    const gridGeneros = document.getElementById('grid-generos');
-    const btnSalvar = document.getElementById('btn-salvar-perfil');
+
+    const inputNome = document.getElementById('nome-usuario');
+    const gridGeneros = document.getElementById('lista-generos');
+    const btnSalvar = document.getElementById('btn-salvar');
 
     const generosUnicos = [...new Set(albuns.map(album => album.genero))].sort();
     let generosSelecionados = [];

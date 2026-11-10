@@ -17,3 +17,44 @@
 [2026-11-09T14:47:05.395Z] ERROR: Erro interno no login: Table 'ressonance_data.usuarios' doesn't exist
 [2026-11-09T14:56:45.779Z] INFO: Servidor iniciado com sucesso.
 [2026-11-09T14:56:58.558Z] ERROR: Erro interno no login: Table 'ressonance_data.usuarios' doesn't exist
+[2026-11-09T20:57:31.273Z] INFO: Servidor iniciado com sucesso.
+[2026-11-09T20:57:38.934Z] ERROR: Erro interno ao procurar álbuns: read ECONNRESET
+[2026-11-09T20:58:17.360Z] ERROR: Erro interno no login: Table 'ressonance_data.usuarios' doesn't exist
+[2026-11-09T21:07:10.836Z] ERROR: Erro interno no login: Table 'ressonance_data.usuarios' doesn't exist
+[2026-11-09T21:07:12.274Z] ERROR: Erro interno no login: Table 'ressonance_data.usuarios' doesn't exist
+[2026-11-09T21:08:10.953Z] INFO: Servidor iniciado com sucesso.
+[2026-11-09T21:08:24.758Z] INFO: Login bem-sucedido: Utilizador ID 8 (admin@teste.com)
+[2026-11-09T21:15:15.348Z] INFO: Login bem-sucedido: Utilizador ID 8 (admin@teste.com)
+[2026-11-09T21:18:13.612Z] INFO: Login bem-sucedido: Utilizador ID 8 (admin@teste.com)
+[2026-11-09T21:27:51.844Z] INFO: Servidor iniciado com sucesso.
+[2026-11-09T21:33:21.932Z] INFO: Login bem-sucedido: Utilizador ID 8 (admin@teste.com)
+[2026-11-09T21:33:59.437Z] INFO: Criação de entidade: Novo utilizador registado (ID: 10, Email: enricodecastrogarcia.61@gmail.com)
+[2026-11-09T21:34:07.792Z] INFO: Login bem-sucedido: Utilizador ID 10 (enricodecastrogarcia.61@gmail.com)
+[2026-11-09T21:37:06.221Z] INFO: Login bem-sucedido: Utilizador ID 8 (admin@teste.com)
+[2026-11-09T21:47:05.221Z] INFO: Login bem-sucedido: Utilizador ID 10 (enricodecastrogarcia.61@gmail.com)
+[2026-11-09T22:09:48.116Z] INFO: Nova resenha criada (ID: 301) pelo utilizador ID 10
+[2026-11-09T23:53:55.496Z] INFO: Servidor iniciado com sucesso.
+[2026-11-09T23:54:02.525Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-09T23:54:06.532Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-09T23:57:50.760Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-09T23:57:51.356Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-09T23:58:16.770Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-09T23:58:24.192Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-09T23:58:47.703Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:01:08.356Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:01:14.687Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:08:19.409Z] INFO: Servidor iniciado com sucesso.
+[2026-11-10T00:08:23.985Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:08:25.048Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:09:12.431Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:09:22.036Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:10:35.508Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:10:54.478Z] INFO: Servidor iniciado com sucesso.
+[2026-11-10T00:10:59.213Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:11:01.218Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:11:04.068Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:11:21.059Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:11:42.502Z] INFO: Servidor iniciado com sucesso.
+[2026-11-10T00:11:48.049Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:14:31.480Z] WARN: Falha de autenticação: Token inválido ou expirado.
+[2026-11-10T00:14:44.555Z] INFO: Login bem-sucedido: Utilizador ID 10 (enricodecastrogarcia.61@gmail.com)

@@ -115,7 +115,7 @@ app.post('/api/auth/registar', async (req, res) => {
     try {
         const dadosValidados = esquemaRegisto.parse(req.body);
 
-        const [usuariosExistentes] = await dbPool.query('SELECT id FROM usuarios WHERE email = ?', [dadosValidados.email]);
+        const [usuariosExistentes] = await dbPool.query('SELECT id FROM utilizadores WHERE email = ?', [dadosValidados.email]);
         if (usuariosExistentes.length > 0) {
             return res.status(400).json({ erro: 'Este email já está registado.' });
         }
@@ -124,7 +124,7 @@ app.post('/api/auth/registar', async (req, res) => {
         const perfilAtribuido = dadosValidados.perfil || 'usuario';
 
         const [resultado] = await dbPool.query(
-            'INSERT INTO usuarios (nome, email, senha_hash, perfil) VALUES (?, ?, ?, ?)',
+            'INSERT INTO utilizadores (nome, email, senha, perfil) VALUES (?, ?, ?, ?)',
             [dadosValidados.nome, dadosValidados.email, senha_hash, perfilAtribuido]
         );
 
@@ -144,7 +144,7 @@ app.post('/api/auth/login', async (req, res) => {
     const { email, senha } = req.body;
 
     try {
-        const [resultados] = await dbPool.query('SELECT * FROM usuarios WHERE email = ?', [email]);
+        const [resultados] = await dbPool.query('SELECT * FROM utilizadores WHERE email = ?', [email]);
 
         if (resultados.length === 0) {
             logger.warn(`Falha de autenticação: Email não encontrado (${email})`);
@@ -152,7 +152,7 @@ app.post('/api/auth/login', async (req, res) => {
         }
 
         const usuario = resultados[0];
-        const senhaCorreta = await bcrypt.compare(senha, usuario.senha_hash);
+        const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
         
         if (!senhaCorreta) {
             logger.warn(`Falha de autenticação: Senha incorreta para o email (${email})`);
@@ -300,13 +300,14 @@ app.get('/api/resenhas/minhas', verificarToken, async (req, res) => {
             FROM resenhas r 
             JOIN albuns a ON r.album_id = a.id 
             WHERE r.utilizador_id = ? 
-            ORDER BY r.data_publicacao DESC
+            ORDER BY r.id DESC 
         `;
+        
         const [minhasResenhas] = await dbPool.query(query, [req.user.id]);
         res.status(200).json(minhasResenhas);
     } catch (erro) {
         logger.error(`Erro ao buscar histórico do utilizador ID ${req.user.id}: ${erro.message}`);
-        res.status(500).json({ erro: 'Erro ao buscar seu histórico de resenhas.' });
+        res.status(500).json({ erro: `Erro SQL: ${erro.message}` });
     }
 });
 
