@@ -30,30 +30,34 @@
                     <figcaption><a href="meu-perfil.html" id="nome-perfil-sidebar" style="color: inherit; text-decoration: none;">Nome do Perfil</a></figcaption>
                 </figure>
             </section>
+            
             <nav aria-label="Menu principal">
                 <ul>
                     <li><a href="minhas-resenhas.html">Suas Resenhas</a></li>
                     <li><a href="adicionar-resenha.html">Adicionar Resenha</a></li>
                 </ul>
             </nav>
+            
             <div class="menu-footer">
                 <a href="#" id="btn-sair">Sair</a>
             </div>
         </aside>
 
-        <!-- CONTEUDO DO PERFIL -->
-        <main class="perfil-container">
+       <!-- CONTEUDO DO PERFIL -->
+        <main class="container-auth">
             <h2 class="perfil-titulo">Meu Perfil</h2>
     
             <div class="perfil-caixa-branca">
-            <input type="text" id="nome-usuario" class="input-nome" placeholder="Digite o nome do usuário">
-        
-            <div class="caixa-generos" id="lista-generos">
+                <input type="text" id="nome-usuario" class="input-nome" placeholder="Digite o nome do usuário">
+            
+                <div class="caixa-generos" id="lista-generos">
+                </div>
+                
+                <!-- Botão agora está dentro da caixa cinza e com a classe correta -->
+                <button id="btn-salvar" class="btn-submit">Salvar</button>
             </div>
-        </div>
-    
-     <button id="btn-salvar" class="btn-salvar">Salvar</button>
-        <div id="mensagem-feedback" class="mensagem-feedback"></div>
+            
+            <div id="mensagem-feedback" class="mensagem-feedback"></div>
         </main>
     </div>
 

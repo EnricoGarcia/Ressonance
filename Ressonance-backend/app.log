@@ -58,3 +58,10 @@
 [2026-11-10T00:11:48.049Z] WARN: Falha de autenticação: Token inválido ou expirado.
 [2026-11-10T00:14:31.480Z] WARN: Falha de autenticação: Token inválido ou expirado.
 [2026-11-10T00:14:44.555Z] INFO: Login bem-sucedido: Utilizador ID 10 (enricodecastrogarcia.61@gmail.com)
+[2026-11-10T01:03:00.575Z] INFO: Servidor iniciado com sucesso.
+[2026-11-10T01:03:53.205Z] INFO: Login bem-sucedido: Utilizador ID 10 (enricodecastrogarcia.61@gmail.com)
+[2026-11-10T01:11:22.288Z] INFO: Perfil do utilizador ID 10 atualizado com sucesso.
+[2026-11-10T11:44:45.913Z] INFO: Servidor iniciado com sucesso.
+[2026-11-10T11:47:11.126Z] INFO: Login bem-sucedido: Utilizador ID 10 (enricodecastrogarcia.61@gmail.com)
+[2026-11-10T11:47:43.674Z] INFO: Perfil do utilizador ID 10 atualizado com sucesso.
+[2026-11-10T12:39:32.663Z] INFO: Servidor iniciado com sucesso.

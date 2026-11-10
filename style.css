@@ -89,23 +89,30 @@ header h1 {
 
 /* Menu Lateral (Efeito que empurra a tela) */
 aside {
+    box-sizing: border-box;
     background-color: var(--bg-menu);
     width: 280px;
-    height: 100%;
-    position: relative;
-    margin-left: -280px; /* Escondido por padrão à esquerda */
-    transition: margin-left 0.3s ease-in-out;
+    height: 100%;            /* era 100vh */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 30px 20px;
+    justify-content: flex-start;
+    padding: 30px 20px 20px 20px;
     border-right: 1px solid var(--borda-cor);
     flex-shrink: 0;
     z-index: 5;
+    margin-left: -280px;
+    transition: margin-left 0.3s ease-in-out;
+    overflow-y: auto;        /* opcional: rola se a tela for muito baixa */
+}
+
+aside nav {
+    flex: 1;                 /* ocupa o resto da altura do aside */
+    display: flex;
+    flex-direction: column;
 }
 
 aside.aberto {
-    margin-left: 0; /* Empurra o conteúdo principal ao abrir */
+    margin-left: 0; 
 }
 
 .perfil-usuario figure {
@@ -143,14 +150,17 @@ nav ul li a:hover {
 }
 
 .menu-footer {
+    width: 100%;
     border-top: 1px solid var(--borda-cor);
     padding-top: 20px;
+    margin-top: auto;        /* agora empurra para o rodapé; o !important não é mais necessário */
 }
 
 .menu-footer a {
-    color: #ff4d4d;
+    color: #ff4d4d; /* Cor de destaque para o botão Sair */
     text-decoration: none;
     font-weight: bold;
+    display: block;
 }
 
 /* =========================================
@@ -608,12 +618,6 @@ main {
     padding: 0 20px;
 }
 
-.perfil-titulo {
-    color: #b05cba;
-    text-align: left;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
 
 .perfil-caixa-branca {
     background-color: #ced4da; 
@@ -859,26 +863,4 @@ main {
     text-align: left !important;
     margin-top: 0 !important;
     width: 100%;
-}
-/* =========================================================================
-   ALINHAMENTO DA BARRA LATERAL (MENUS NO TOPO)
-   ========================================================================= */
-aside {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start !important; 
-    height: 100vh; /* Garante que a barra lateral tenha a exata altura da tela */
-    padding-bottom: 20px; /* Evita que o botão cole no final absoluto da tela */
-}
-
-/* Garante que o bloco dos filtros não ocupe espaço infinito */
-.filtros-sidebar {
-    margin-bottom: 20px;
-}
-
-.menu-footer {
-    margin-top: auto !important; 
-    width: 100%;
-    border-top: 1px solid var(--borda-cor);
-    padding-top: 20px;
 }
