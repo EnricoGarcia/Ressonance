@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // Menu Lateral
+document.addEventListener("DOMContentLoaded", async () => {
     const btnMenu = document.getElementById('btn-menu');
     const menuLateral = document.getElementById('menu-lateral');
     if (btnMenu && menuLateral) {
@@ -8,50 +7,73 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.title = "Meu Perfil - Ressonance";
 
-
     const inputNome = document.getElementById('nome-usuario');
     const gridGeneros = document.getElementById('lista-generos');
     const btnSalvar = document.getElementById('btn-salvar');
 
-    const generosUnicos = [...new Set(albuns.map(album => album.genero))].sort();
+    // Validação de token no perfil
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert("Faça login para acessar o perfil.");
+        return;
+    }
+
     let generosSelecionados = [];
 
-
-    const perfilSalvo = JSON.parse(localStorage.getItem('usuarioPerfil'));
-    if (perfilSalvo) {
-        inputNome.value = perfilSalvo.nome || '';
-        generosSelecionados = perfilSalvo.generos || [];
-    }
-  
-    //LISTA DE GENEROS
-    generosUnicos.forEach(genero => {
-        const btn = document.createElement('button');
-        btn.classList.add('btn-genero');
-        btn.textContent = genero;
-        
-        if (generosSelecionados.includes(genero)) {
-            btn.classList.add('selecionado');
+    // 1. CARREGAR OS DADOS REAIS DO BANCO DE DADOS
+    try {
+        const res = await fetch('http://localhost:3000/api/usuarios/me', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+            const perfilSalvo = await res.json();
+            inputNome.value = perfilSalvo.nome || '';
+            generosSelecionados = perfilSalvo.generos || [];
+            
+            const nomeSidebar = document.getElementById('nome-perfil-sidebar');
+            if (nomeSidebar) nomeSidebar.textContent = perfilSalvo.nome;
         }
+    } catch (err) {
+        console.error("Erro ao carregar perfil:", err);
+    }
 
-        btn.addEventListener('click', () => {
+    // Usando a base de dados em memória para gerar os botões disponíveis
+    const generosUnicos = [...new Set(albuns.map(album => album.genero))].sort();
+
+    // 2. RENDERIZAR OS BOTÕES NA TELA
+    function renderizarGrid() {
+        gridGeneros.innerHTML = '';
+        generosUnicos.forEach(genero => {
+            const btn = document.createElement('button');
+            btn.classList.add('btn-genero');
+            btn.textContent = genero;
+            
             if (generosSelecionados.includes(genero)) {
-                generosSelecionados = generosSelecionados.filter(g => g !== genero);
-                btn.classList.remove('selecionado');
-            } else {
-                if (generosSelecionados.length >= 3) {
-                    alert("Você só pode escolher no máximo 3 gêneros.");
-                    return;
-                }
-                generosSelecionados.push(genero);
                 btn.classList.add('selecionado');
             }
-        });
-        
-        gridGeneros.appendChild(btn);
-    });
 
-    // SALVAR PERFIL
-    btnSalvar.addEventListener('click', () => {
+            btn.addEventListener('click', () => {
+                if (generosSelecionados.includes(genero)) {
+                    generosSelecionados = generosSelecionados.filter(g => g !== genero);
+                    btn.classList.remove('selecionado');
+                } else {
+                    if (generosSelecionados.length >= 3) {
+                        alert("Você só pode escolher no máximo 3 gêneros.");
+                        return;
+                    }
+                    generosSelecionados.push(genero);
+                    btn.classList.add('selecionado');
+                }
+            });
+            
+            gridGeneros.appendChild(btn);
+        });
+    }
+
+    renderizarGrid();
+
+    // 3. SALVAR O PERFIL NO BACKEND
+    btnSalvar.addEventListener('click', async () => {
         const nomeDigitado = inputNome.value.trim();
         
         if (!nomeDigitado) {
@@ -59,15 +81,29 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const dadosPerfil = {
-            nome: nomeDigitado,
-            generos: generosSelecionados
-        };
-        localStorage.setItem('usuarioPerfil', JSON.stringify(dadosPerfil));
+        try {
+            // Requisição PUT atualizando no Banco (server.js)
+            const res = await fetch('http://localhost:3000/api/usuarios/me', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    nome: nomeDigitado,
+                    generos: generosSelecionados
+                })
+            });
 
-        const nomeSidebar = document.getElementById('nome-perfil-sidebar');
-        if (nomeSidebar) nomeSidebar.textContent = nomeDigitado;
-
-        alert("Perfil salvo com sucesso!");
+            if (res.ok) {
+                const nomeSidebar = document.getElementById('nome-perfil-sidebar');
+                if (nomeSidebar) nomeSidebar.textContent = nomeDigitado;
+                alert("Perfil salvo com sucesso no banco de dados!");
+            } else {
+                alert("Falha ao salvar no banco de dados.");
+            }
+        } catch (erro) {
+            alert("Erro de comunicação com o servidor.");
+        }
     });
 });

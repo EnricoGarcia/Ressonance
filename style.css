@@ -822,3 +822,63 @@ main {
     font-style: normal;
     margin: 0;
 }
+
+.filtros-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+    border-top: 1px solid var(--borda-cor);
+    padding-top: 20px;
+}
+
+.filtro-select {
+    background-color: #ced4da;
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    appearance: none; 
+    cursor: pointer;
+    background-image: url('data:image/svg+xml;utf8,<svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L8 8L14 2" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    padding-right: 40px;
+    width: 100%;
+}
+
+.filtro-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #b05cba;
+}
+
+.titulo-top-left {
+    align-self: flex-start !important;
+    text-align: left !important;
+    margin-top: 0 !important;
+    width: 100%;
+}
+/* =========================================================================
+   ALINHAMENTO DA BARRA LATERAL (MENUS NO TOPO)
+   ========================================================================= */
+aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important; 
+    height: 100vh; /* Garante que a barra lateral tenha a exata altura da tela */
+    padding-bottom: 20px; /* Evita que o botão cole no final absoluto da tela */
+}
+
+/* Garante que o bloco dos filtros não ocupe espaço infinito */
+.filtros-sidebar {
+    margin-bottom: 20px;
+}
+
+.menu-footer {
+    margin-top: auto !important; 
+    width: 100%;
+    border-top: 1px solid var(--borda-cor);
+    padding-top: 20px;
+}

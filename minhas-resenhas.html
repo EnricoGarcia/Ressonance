@@ -36,19 +36,28 @@
                     <li><a href="adicionar-resenha.html">Adicionar Resenha</a></li>
                 </ul>
             </nav>
+            <div class="filtros-sidebar">
+                    <select id="filtro-nome" class="filtro-select">
+                        <option value="">Nome do álbum</option>
+                    </select>
+                    <select id="filtro-genero" class="filtro-select">
+                        <option value="">Gênero do álbum</option>
+                    </select>
+                </div>
             <div class="menu-footer">
                 <a href="#" id="btn-sair">Sair</a>
             </div>
         </aside>
 
-<main class="container-auth" style="max-width: 900px; width: 100%; margin: 40px auto; padding: 0 20px;">
-    <h2 class="perfil-titulo">Suas Resenhas</h2>
-    
-    <div class="perfil-caixa-branca" style="background-color: #ced4da; border-radius: 30px; padding: 20px 40px; display: flex; flex-direction: column; gap: 20px;">
-        <div id="lista-minhas-resenhas">
-        </div>
-    </div>
-</main>
+        <main class="container-auth" style="max-width: 900px; width: 100%; margin: 20px auto; padding: 0 20px; justify-content: flex-start;">
+            <h2 class="perfil-titulo titulo-top-left">Suas Resenhas</h2>
+            
+            <div class="perfil-caixa-branca" style="background-color: #ced4da; border-radius: 30px; padding: 20px 40px; display: flex; flex-direction: column; gap: 20px; width: 100%;">
+                <div id="lista-minhas-resenhas">
+                    <!-- Os cards gerados pelo JS aparecerão aqui -->
+                </div>
+            </div>
+        </main>
     </div>
 
     <script src="barralat.js"></script>

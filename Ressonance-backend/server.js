@@ -296,13 +296,13 @@ app.get('/api/albuns/:id/resenhas', async (req, res) => {
 app.get('/api/resenhas/minhas', verificarToken, async (req, res) => {
     try {
         const query = `
-            SELECT r.id, r.nota, r.texto AS resenha, a.titulo AS album_titulo, a.capa AS album_capa 
+            SELECT r.id, r.nota, r.texto AS resenha, 
+                   a.titulo AS album_titulo, a.capa AS album_capa, a.genero AS album_genero 
             FROM resenhas r 
             JOIN albuns a ON r.album_id = a.id 
             WHERE r.utilizador_id = ? 
             ORDER BY r.id DESC 
         `;
-        
         const [minhasResenhas] = await dbPool.query(query, [req.user.id]);
         res.status(200).json(minhasResenhas);
     } catch (erro) {
