@@ -1,32 +1,23 @@
-// criar-admin.js
+// Executar manualmente pelo terminal, fora da API pública.
+// ADMIN_EMAIL=... ADMIN_PASSWORD=... node criar-admin.js
 const bcrypt = require('bcrypt');
 const mysql = require('mysql2/promise');
-require('dotenv').config();
+const { loadConfig } = require('./config');
 
-async function criarAdministrador() {
+async function main() {
+    const config = loadConfig();
+    const { ADMIN_EMAIL: email, ADMIN_PASSWORD: senha, ADMIN_NAME: nome = 'Administrador' } = process.env;
+    if (!email || !senha || senha.length < 12 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        throw new Error('Defina ADMIN_EMAIL válido e ADMIN_PASSWORD com no mínimo 12 caracteres no ambiente.');
+    }
+    const conexao = await mysql.createConnection(config.database);
     try {
-        const conexao = await mysql.createConnection({
-            host: process.env.DB_HOST || 'localhost',
-            user: process.env.DB_USER || 'root',
-            password: process.env.DB_PASSWORD || '',
-            database: process.env.DB_NAME || 'ressonance_data'
-        });
-
-        const hashSenha = await bcrypt.hash('123456', 10);
-
-        const query = `
-            INSERT INTO utilizadores (nome, email, senha, perfil) 
-            VALUES (?, ?, ?, ?)
-            ON DUPLICATE KEY UPDATE senha = ?, perfil = ?
-        `;
-        
-        await conexao.query(query, ['Administrador', 'admin@teste.com', hashSenha, 'admin', hashSenha, 'admin']);
-
-        console.log("✅ Admin criado/atualizado com sucesso com senha criptografada!");
+        const hash = await bcrypt.hash(senha, 12);
+        // Não altera nenhuma conta existente silenciosamente.
+        const [result] = await conexao.execute('INSERT INTO utilizadores (nome, email, senha, perfil) VALUES (?, ?, ?, ?)', [nome, email.toLowerCase(), hash, 'admin']);
+        console.log(`Administrador criado (ID ${result.insertId}). Apague ADMIN_PASSWORD do ambiente.`);
+    } finally {
         await conexao.end();
-    } catch (erro) {
-        console.error("❌ Erro ao criar admin:", erro.message);
     }
 }
-
-criarAdministrador();
+main().catch(err => { console.error(`Falha ao criar administrador: ${err.message}`); process.exitCode = 1; });
