@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.title = "Minhas Resenhas - Ressonance";
 
+    const { escapeHTML, safeImageURL } = window.RessonanceUI;
     const containerResenhas = document.getElementById('lista-minhas-resenhas');
     const filtroNome = document.getElementById('filtro-nome');
     const filtroGenero = document.getElementById('filtro-genero');
@@ -45,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         renderizarResenhas(todasMinhasResenhas);
 
     } catch (erro) {
-        containerResenhas.innerHTML = `<p class="sem-resenhas" style="color: red;">${erro.message}</p>`;
+        containerResenhas.innerHTML = `<p class="sem-resenhas" style="color: red;">${escapeHTML(erro.message)}</p>`;
     }
 
     function popularFiltros(resenhas) {
@@ -53,13 +54,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         const nomesUnicos = [...new Set(resenhas.map(r => r.album_titulo))].sort();
         filtroNome.innerHTML = '<option value="">Todos os Álbuns</option>';
-        nomesUnicos.forEach(nome => { filtroNome.innerHTML += `<option value="${nome}">${nome}</option>`; });
+        nomesUnicos.forEach(nome => { filtroNome.innerHTML += `<option value="${escapeHTML(nome)}">${escapeHTML(nome)}</option>`; });
 
         // Coleta apenas os gêneros existentes nos álbuns resenhados pelo usuário
         const generosPresentes = resenhas.map(r => r.album_genero).filter(g => g);
         const generosUnicos = [...new Set(generosPresentes)].sort();
         filtroGenero.innerHTML = '<option value="">Todos os Gêneros</option>';
-        generosUnicos.forEach(genero => { filtroGenero.innerHTML += `<option value="${genero}">${genero}</option>`; });
+        generosUnicos.forEach(genero => { filtroGenero.innerHTML += `<option value="${escapeHTML(genero)}">${escapeHTML(genero)}</option>`; });
     }
 
     function aplicarFiltros() {
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         let filtrados = todasMinhasResenhas.filter(r => {
             const passaNome = n === "" || r.album_titulo === n;
-            const passaGenero = g === "" || r.album_genero === g || !r.album_genero;
+            const passaGenero = g === "" || r.album_genero === g;
             return passaNome && passaGenero;
         });
         renderizarResenhas(filtrados);
@@ -89,14 +90,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         lista.forEach(resenha => {
             const notaFormatada = parseFloat(resenha.nota).toFixed(1);
-            const imagemCapa = resenha.album_capa ? resenha.album_capa : 'img/placeholder.jpg';
+            const imagemCapa = safeImageURL(resenha.album_capa);
 
             const cardHTML = `
                 <article class="nova-resenha-horizontal">
                     <div class="resenha-bloco-esquerdo">
-                        <img src="${imagemCapa}" alt="Capa de ${resenha.album_titulo}" class="nova-capa-resenha">
+                        <img src="${escapeHTML(imagemCapa)}" alt="Capa de ${escapeHTML(resenha.album_titulo)}" class="nova-capa-resenha">
                         <div class="resenha-info-titulos">
-                            <h3 class="novo-titulo-album">${resenha.album_titulo}</h3>
+                            <h3 class="novo-titulo-album">${escapeHTML(resenha.album_titulo)}</h3>
                             <div class="nova-nota-album">
                                 <span class="estrela-icone-grande">★</span>
                                 <span class="texto-nota-fracao">(${notaFormatada}/5)</span>
@@ -104,7 +105,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         </div>
                     </div>
                     <div class="resenha-bloco-direito">
-                        <p class="novo-texto-resenha">"${resenha.resenha}"</p>
+                        <p class="novo-texto-resenha">"${escapeHTML(resenha.resenha)}"</p>
                     </div>
                 </article>
             `;

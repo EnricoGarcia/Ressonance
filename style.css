@@ -644,6 +644,10 @@ main {
     text-align: center;
     width: 100%;
     box-sizing: border-box; 
+    text-align: left;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
 }
 
 .perfil-caixa-branca .slider-container {

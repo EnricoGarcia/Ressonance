@@ -24,7 +24,7 @@
         <form id="form-cadastro" class="form-auth" style="display: none;">
             <input type="text" id="nome-cadastro" placeholder="Digite seu nome" required>
             <input type="email" id="email-cadastro" placeholder="Digite seu e-mail" required>
-            <input type="password" id="senha-cadastro" placeholder="Digite sua senha" required>
+            <input type="password" id="senha-cadastro" minlength="8" maxlength="72" placeholder="Digite sua senha" required>
             <button type="submit" class="btn-submit">Cadastrar</button>
             <p class="alternar-auth" id="ir-para-login">Já tem conta? Faça Login</p>
         </form>
