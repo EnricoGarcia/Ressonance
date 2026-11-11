@@ -37,8 +37,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Erro ao carregar perfil:", err);
     }
 
-    // Usando a base de dados em memória para gerar os botões disponíveis
-    const generosUnicos = [...new Set(albuns.map(album => album.genero))].sort();
+ let generosUnicos = [];
+try {
+    const resAlbuns = await fetch('http://localhost:3000/api/albuns');
+    if (!resAlbuns.ok) throw new Error('Falha ao buscar álbuns');
+    const albunsDoBanco = await resAlbuns.json();
+    generosUnicos = [...new Set(albunsDoBanco.map(a => a.genero))]
+        .sort((a, b) => a.localeCompare(b, 'pt'));
+} catch (err) {
+    console.error("Erro ao carregar gêneros:", err);
+    gridGeneros.innerHTML = '<p style="color: red;">Erro ao carregar os gêneros. Verifique o servidor.</p>';
+}
 
     // 2. RENDERIZAR OS BOTÕES NA TELA
     function renderizarGrid() {

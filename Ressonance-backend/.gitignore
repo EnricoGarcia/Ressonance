@@ -1,2 +1,16 @@
 node_modules/
 .env
+# Dependencias
+node_modules/
+
+# Variaveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# Arquivos temporarios
+*.zip

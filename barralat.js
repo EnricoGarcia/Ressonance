@@ -41,15 +41,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Botão "Sair" Corrigido (da mensagem anterior)
     const btnSair = document.getElementById('btn-sair');
     if (btnSair) {
-        btnSair.addEventListener('click', (e) => {
+        btnSair.addEventListener('click', async (e) => {
             e.preventDefault();
-            
+            const token = localStorage.getItem('token');
+            let revoked = !token;
+            if (token) {
+                try {
+                    const response = await fetch('http://localhost:3000/api/auth/logout', {
+                        method: 'POST', headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    // 401 também indica que a sessão já estava inválida.
+                    revoked = response.ok || response.status === 401;
+                } catch (_) { revoked = false; }
+            }
             localStorage.removeItem('token');
             localStorage.removeItem('usuarioPerfil');
-            
-            if (nomeSidebar) nomeSidebar.textContent = "Fazer Login";
-            
-            alert("Sessão encerrada com sucesso.");
+            if (nomeSidebar) nomeSidebar.textContent = 'Fazer Login';
+            alert(revoked ? 'Sessão encerrada com sucesso.' :
+                'Sessão removida deste navegador, mas não foi possível revogar o token no servidor.');
             window.location.href = 'login.html';
         });
     }

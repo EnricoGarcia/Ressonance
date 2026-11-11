@@ -1,5 +1,7 @@
 require('dotenv').config();
 const mysql = require('mysql2/promise');
+const bcrypt = require('bcrypt');
+const { randomBytes } = require('node:crypto');
 
 // 1. Catálogo de 30 Álbuns
 const albuns = [
@@ -200,6 +202,8 @@ async function popularTabelas() {
         // 1. Limpa as tabelas na ordem correta para não ferir as chaves estrangeiras
         await conexao.query('SET FOREIGN_KEY_CHECKS = 0');
         await conexao.query('TRUNCATE TABLE resenhas');
+        await conexao.query('TRUNCATE TABLE faixas');
+        await conexao.query('TRUNCATE TABLE utilizadores_generos');
         await conexao.query('TRUNCATE TABLE albuns');
         await conexao.query('TRUNCATE TABLE utilizadores');
         await conexao.query('SET FOREIGN_KEY_CHECKS = 1');
@@ -216,8 +220,9 @@ async function popularTabelas() {
         ];
 
         for (const user of utilizadores) {
-            const queryUser = 'INSERT INTO utilizadores (id, nome, email) VALUES (?, ?, ?)';
-            await conexao.execute(queryUser, [user.id, user.nome, user.email]);
+            const queryUser = 'INSERT INTO utilizadores (id, nome, email, senha, perfil) VALUES (?, ?, ?, ?, ?)';
+            const hash = await bcrypt.hash(randomBytes(24).toString('hex'), 10);
+            await conexao.execute(queryUser, [user.id, user.nome, user.email, hash, 'usuario']);
         }
         console.log(`✅ ${utilizadores.length} Utilizadores inseridos com sucesso.`);
 

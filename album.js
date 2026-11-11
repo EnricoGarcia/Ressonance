@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    function sanitizarHTML(texto) {
-        const div = document.createElement('div');
-        div.textContent = texto;
-        return div.innerHTML;
-    }
+    const { escapeHTML: sanitizarHTML, safeImageURL } = window.RessonanceUI;
 
     // 1. MENU LATERAL
     const btnMenu = document.getElementById('btn-menu');
@@ -42,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         // 3. BUSCA DOS DADOS DO BACKEND
         const [resAlbum, resFaixas, resResenhas] = await Promise.all([
-            fetch('http://localhost:3000/api/albuns'),
+            fetch(`http://localhost:3000/api/albuns/${albumId}`),
             fetch(`http://localhost:3000/api/albuns/${albumId}/faixas`),
             fetch(`http://localhost:3000/api/albuns/${albumId}/resenhas`)
         ]);
@@ -51,12 +47,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             throw new Error("Falha ao buscar dados do servidor");
         }
 
-        const albuns = await resAlbum.json();
+        const album = await resAlbum.json();
         const faixas = await resFaixas.json();
         const resenhas = await resResenhas.json();
 
-        const album = albuns.find(a => a.id === albumId);
-        
         if (!album) {
             detalhesTopo.innerHTML = '<h2>Álbum não encontrado.</h2>';
             return;
@@ -67,7 +61,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // 4. PREPARAÇÃO DOS DADOS
         const somaNotas = resenhas.reduce((soma, av) => soma + parseFloat(av.nota), 0);
         const media = resenhas.length > 0 ? (somaNotas / resenhas.length).toFixed(1) : "0.0";
-        const imagemCapa = album.capa ? album.capa : 'img/placeholder.jpg';
+        const imagemCapa = safeImageURL(album.capa);
 
         const listaDeMusicasHTML = faixas.length > 0 
             ? faixas.map(f => `<li><span class="numero-faixa">${f.numero_faixa}.</span> ${sanitizarHTML(f.titulo)}</li>`).join('')
@@ -92,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
 
             <div class="conteudo-principal-detalhes">
-                <img src="${imagemCapa}" alt="Capa do álbum ${sanitizarHTML(album.titulo)}" class="capa-grande-img">
+                <img src="${sanitizarHTML(imagemCapa)}" alt="Capa do álbum ${sanitizarHTML(album.titulo)}" class="capa-grande-img">
                 <div class="informacoes-laterais">
                     <div class="tags-genero"><span class="tag">${sanitizarHTML(album.genero)}</span></div>
                     <div class="container-faixas">

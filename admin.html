@@ -17,6 +17,8 @@
     
     <div class="perfil-caixa-branca">
         <form id="form-album">
+            <label for="id-album-editar">ID do álbum para editar (opcional; deixe vazio para cadastrar)</label>
+            <input type="number" id="id-album-editar" min="1" step="1" placeholder="Ex.: 12 — apenas se for editar">
             <input type="text" id="titulo" name="titulo" placeholder="Título do Álbum" required>
             
             <input type="text" id="artista" name="artista" placeholder="Artista" required>
@@ -27,15 +29,19 @@
             </div>
 
             <input type="url" id="capa" name="capa" placeholder="URL da Capa (opcional)">
+
+            <textarea id="faixas" name="faixas" rows="8"
+                placeholder="Faixas do álbum (uma por linha)&#10;Ex:&#10;Once&#10;Even Flow&#10;Alive"></textarea>
         </form>
     </div>
 
     <div style="text-align: center; margin-top: 20px;">
-        <button type="submit" form="form-album" class="btn-submit">Cadastrar Álbum</button>
+        <button type="submit" form="form-album" class="btn-submit">Salvar Álbum</button>
         <div id="mensagem-retorno" style="margin-top: 15px;"></div>
     </div>
 </main>
 
+    <script src="ui.js"></script>
     <script src="admin.js"></script>
 </body>
 </html>

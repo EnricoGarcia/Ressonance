@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const resposta = await fetch('http://localhost:3000/api/auth/registar', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nome, email, senha, perfil: "usuario" })
+                    body: JSON.stringify({ nome, email, senha })
                 });
                 
                 const dados = await resposta.json();
