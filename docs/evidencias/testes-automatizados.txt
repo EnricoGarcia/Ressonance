@@ -1,0 +1,134 @@
+
+> ressonance-backend@1.0.0 test
+> node --test tests/*.test.js
+
+TAP version 13
+# Subtest: 01 - Cadastro bloqueia elevação de privilégio via perfil=admin
+ok 1 - 01 - Cadastro bloqueia elevação de privilégio via perfil=admin
+  ---
+  duration_ms: 81.807171
+  type: 'test'
+  ...
+# Subtest: 02 - Cadastro válido cria apenas usuário com hash
+ok 2 - 02 - Cadastro válido cria apenas usuário com hash
+  ---
+  duration_ms: 620.076105
+  type: 'test'
+  ...
+# Subtest: 03 - Login exige tipos corretos e informa Zod 4 issues
+ok 3 - 03 - Login exige tipos corretos e informa Zod 4 issues
+  ---
+  duration_ms: 12.77095
+  type: 'test'
+  ...
+# Subtest: 04 - Login inválido não emite JWT
+ok 4 - 04 - Login inválido não emite JWT
+  ---
+  duration_ms: 10.435142
+  type: 'test'
+  ...
+# Subtest: 05 - Rota protegida bloqueia requisição sem token
+ok 5 - 05 - Rota protegida bloqueia requisição sem token
+  ---
+  duration_ms: 9.896315
+  type: 'test'
+  ...
+# Subtest: 06 - Token com claim admin forjado não promove usuário do banco
+ok 6 - 06 - Token com claim admin forjado não promove usuário do banco
+  ---
+  duration_ms: 18.596995
+  type: 'test'
+  ...
+# Subtest: 07 - JWT_SECRET ausente ou curto impede iniciar
+ok 7 - 07 - JWT_SECRET ausente ou curto impede iniciar
+  ---
+  duration_ms: 0.86458
+  type: 'test'
+  ...
+# Subtest: 08 - Admin cria álbum; catálogo retorna média sem N+1
+ok 8 - 08 - Admin cria álbum; catálogo retorna média sem N+1
+  ---
+  duration_ms: 18.219514
+  type: 'test'
+  ...
+# Subtest: 09 - PUT atualiza álbum e retorna 404 para ID inexistente
+ok 9 - 09 - PUT atualiza álbum e retorna 404 para ID inexistente
+  ---
+  duration_ms: 32.27959
+  type: 'test'
+  ...
+# Subtest: 10 - Autor ou admin pode excluir resenha; terceiro não pode
+ok 10 - 10 - Autor ou admin pode excluir resenha; terceiro não pode
+  ---
+  duration_ms: 17.813909
+  type: 'test'
+  ...
+# Subtest: 11 - Logout revoga token no banco e impede reutilização
+ok 11 - 11 - Logout revoga token no banco e impede reutilização
+  ---
+  duration_ms: 17.918862
+  type: 'test'
+  ...
+# Subtest: 12 - SQL Injection no ID é barrada antes de consultar banco
+ok 12 - 12 - SQL Injection no ID é barrada antes de consultar banco
+  ---
+  duration_ms: 6.159674
+  type: 'test'
+  ...
+# Subtest: 13 - Erros internos escondem detalhe em produção e mostram em desenvolvimento
+ok 13 - 13 - Erros internos escondem detalhe em produção e mostram em desenvolvimento
+  ---
+  duration_ms: 19.342385
+  type: 'test'
+  ...
+# Subtest: 14 - XSS: saída HTML e URL de imagem são neutralizadas
+ok 14 - 14 - XSS: saída HTML e URL de imagem são neutralizadas
+  ---
+  duration_ms: 0.483381
+  type: 'test'
+  ...
+# Subtest: 15 - Banco recebe parâmetros separados da consulta SQL
+ok 15 - 15 - Banco recebe parâmetros separados da consulta SQL
+  ---
+  duration_ms: 0.949665
+  type: 'test'
+  ...
+# Subtest: 16 - JSON malformado retorna 400 sem informação interna
+ok 16 - 16 - JSON malformado retorna 400 sem informação interna
+  ---
+  duration_ms: 10.327915
+  type: 'test'
+  ...
+# Subtest: 17 - Lista de álbuns usa uma consulta agregada para notas
+ok 17 - 17 - Lista de álbuns usa uma consulta agregada para notas
+  ---
+  duration_ms: 0.91108
+  type: 'test'
+  ...
+# Subtest: 18 - Servidor estático não expõe arquivos do backend nem .git e envia CSP
+ok 18 - 18 - Servidor estático não expõe arquivos do backend nem .git e envia CSP
+  ---
+  duration_ms: 31.034675
+  type: 'test'
+  ...
+# Subtest: 19 - Token expirado é recusado
+ok 19 - 19 - Token expirado é recusado
+  ---
+  duration_ms: 6.801757
+  type: 'test'
+  ...
+# Subtest: 20 - Perfil com mais de três gêneros é rejeitado
+ok 20 - 20 - Perfil com mais de três gêneros é rejeitado
+  ---
+  duration_ms: 11.308537
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1178.484569
